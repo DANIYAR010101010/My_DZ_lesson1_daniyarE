@@ -1,8 +1,11 @@
 package com.example.my_dz_lesson1_daniyare
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,7 +15,7 @@ import com.example.my_dz_lesson1_daniyare.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,16 +24,30 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+         navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_profile,R.id.navigation_profile
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_profile
             )
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            val fragments = arrayOf(R.id.navigation_home,R.id.navigation_profile,R.id.navigation_dashboard,
+            R.id.navigation_notifications)
+            if (fragments.contains(destination.id)){
+              navView.visibility= View.VISIBLE
+            } else{navView.visibility= View.GONE
+            }
+        }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
+
+
 }
