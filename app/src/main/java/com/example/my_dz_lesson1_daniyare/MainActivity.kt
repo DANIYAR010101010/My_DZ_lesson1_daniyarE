@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+            // navController.navigate(R.id.boardFragment)
+
+
+
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             val fragments = arrayOf(R.id.navigation_home,R.id.navigation_profile,R.id.navigation_dashboard,
             R.id.navigation_notifications)
@@ -42,12 +46,17 @@ class MainActivity : AppCompatActivity() {
               navView.visibility= View.VISIBLE
             } else{navView.visibility= View.GONE
             }
+            if (destination.id == R.id.boardFragment)
+                supportActionBar?.hide()
+            else supportActionBar?.show()
+
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp()
     }
+
 
 
 }

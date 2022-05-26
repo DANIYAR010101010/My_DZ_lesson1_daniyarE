@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -27,14 +28,15 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getEditText()
         binding?.btnSave?.setOnClickListener {
-
             save()
-
-
         }
+    }
 
-
+    private fun getEditText() {
+        val text = arguments?.getString("keyString")
+        binding?.editNews?.setText(text)
     }
 
     private fun save() {

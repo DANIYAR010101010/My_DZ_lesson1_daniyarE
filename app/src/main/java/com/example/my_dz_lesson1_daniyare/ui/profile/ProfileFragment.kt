@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         return binding.root
@@ -46,7 +46,6 @@ class ProfileFragment : Fragment() {
 
     private fun initLauncher() {
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-
                 if (it.resultCode == AppCompatActivity.RESULT_OK) {
                     val image = it.data?.data
                     if (image != null) {
@@ -54,10 +53,7 @@ class ProfileFragment : Fragment() {
                     }
                 }
             }
-
     }
-
-
 }
 
 
