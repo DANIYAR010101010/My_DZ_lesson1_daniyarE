@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.my_dz_lesson1_daniyare.R
 import com.example.my_dz_lesson1_daniyare.databinding.ItemNewsBinding
 import com.example.my_dz_lesson1_daniyare.model.News
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewsAdapter(private val onClick: (position: Int) -> Unit) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
@@ -42,6 +44,15 @@ class NewsAdapter(private val onClick: (position: Int) -> Unit) :
         notifyItemRemoved(pos)
     }
 
+    fun addItems(list: List<News>) {
+     this.list.addAll(list)
+        notifyDataSetChanged()
+
+    }
+    fun getTodaydata():String{
+        return SimpleDateFormat("hh:mm,dd MMMM yyyy", Locale.getDefault()).format(Date())
+    }
+
     inner class ViewHolder(private var binding: ItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News) {
@@ -60,6 +71,7 @@ class NewsAdapter(private val onClick: (position: Int) -> Unit) :
             itemView.setOnClickListener{
                 onClickListenerAdapter?.invoke(news)
             }
+            binding.data.text = getTodaydata()
             itemView.setOnLongClickListener {
                 onLongClickListenerAdapter?.invoke(adapterPosition)
                 return@setOnLongClickListener true

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.my_dz_lesson1_daniyare.App
 import com.example.my_dz_lesson1_daniyare.R
 import com.example.my_dz_lesson1_daniyare.databinding.FragmentHomeBinding
 import com.example.my_dz_lesson1_daniyare.model.News
@@ -29,6 +30,10 @@ class HomeFragment : Fragment()   {
 
             }
         }
+        val list = App.dataBase.newsDao().getAll()
+
+            adapter.addItems(list)
+
     }
 
     override fun onCreateView(

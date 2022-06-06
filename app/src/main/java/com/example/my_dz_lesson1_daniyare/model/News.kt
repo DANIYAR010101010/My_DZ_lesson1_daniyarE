@@ -1,8 +1,13 @@
 package com.example.my_dz_lesson1_daniyare.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity
 data class News(
+    @PrimaryKey(autoGenerate = true)
+    val id : Int,
     val title : String,
     val createdAt: Long
 

@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.my_dz_lesson1_daniyare.Preferences
 import com.example.my_dz_lesson1_daniyare.databinding.FragmentNotificationsBinding
 import com.example.my_dz_lesson1_daniyare.databinding.FragmentProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,8 +32,15 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val editName=binding.editName.toString()
+        Preferences(requireContext()).saveName("name")
+        if(editName != null){
+           Preferences(requireContext()).getName("name")
+        }
+
         initLauncher()
         initListener()
+
     }
 
     private fun initListener() {
